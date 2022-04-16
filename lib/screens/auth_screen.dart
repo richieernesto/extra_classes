@@ -19,6 +19,7 @@ class AuthScreen extends StatelessWidget {
               ),
               Container(
                   alignment: Alignment.center,
+                  margin: EdgeInsets.only(top: 10),
                   padding: EdgeInsets.all(35),
                   child: AuthCard()),
           ]
