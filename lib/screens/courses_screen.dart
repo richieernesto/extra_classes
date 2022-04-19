@@ -33,7 +33,8 @@ class CoursesScreen extends StatelessWidget {
             Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(left:16.0,right:16.0,top:8.0,bottom:8.0),
+                  padding: const EdgeInsets.only(
+                      left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -67,11 +68,12 @@ class CoursesScreen extends StatelessWidget {
                         //the bottom text container
                         return GestureDetector(
                           behavior: HitTestBehavior.translucent,
-                           onTap: ()=> Navigator.push(context, MaterialPageRoute(
-                             builder: (_)=> MoreInfoScreen(image: AssetImage(imageDirectory))
-                           
-                           )),
-                             child: Container(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => MoreInfoScreen(
+                                      image: AssetImage(imageDirectory)))),
+                          child: Container(
                               margin: EdgeInsets.all(10.0),
                               width: 210.0,
                               color: Colors.white10,
@@ -84,19 +86,19 @@ class CoursesScreen extends StatelessWidget {
                                       height: 120.0,
                                       width: 200.0,
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: Offset(10.0, 5.0),
-                                            blurRadius: 10.0,
-                                          )
-                                        ]),
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: Offset(10.0, 5.0),
+                                              blurRadius: 10.0,
+                                            )
+                                          ]),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
-                                        
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           crossAxisAlignment:
@@ -115,55 +117,76 @@ class CoursesScreen extends StatelessWidget {
                                                 fontSize: 10.0,
                                               ),
                                             ),
-                                            Text(
-                                              "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                                              style: TextStyle(
-                                                  fontSize: 10.0,
-                                                  color: Colors.grey),
+                                            Container(
+                                              child: Text(
+                                                "“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                                                style: TextStyle(
+                                                    fontSize: 10.0,
+                                                    color: Colors.grey),
+                                                    maxLines: 3,
+                                                    overflow:TextOverflow.ellipsis ,
+                                              ),
                                             )
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(20.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: Offset(10.0, 5.0),
-                                            blurRadius: 10.0,
-                                          )
-                                        ]),
-                                    child: Stack(
-                                      children: <Widget>[
-                                        ClipRRect(
+                                  GestureDetector(
+                                    behavior: HitTestBehavior.translucent,
+                                    onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => MoreInfoScreen(
+                                                image: AssetImage(
+                                                    imageDirectory)))),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(20.0),
-                                          child: Image(
-                                            height: 180,
-                                            width: 180,
-                                            image: AssetImage(
-                                                "lib/assets/img/bgimage.jpg"),
-                                            fit: BoxFit.cover,
-                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: Offset(10.0, 5.0),
+                                              blurRadius: 10.0,
+                                            )
+                                          ]),
+                                      child: Hero(
+                                        tag: imageDirectory,
+                                                                              child: Stack(
+                                          children: <Widget>[
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              child: Image(
+                                                height: 180,
+                                                width: 180,
+                                                image: AssetImage(
+                                                    "lib/assets/img/bgimage2.jpg"),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            //Price stated here
+                                            Positioned(
+                                              left: 10.0,
+                                              bottom: 10.0,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                    "\$ Price",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12.0),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                        //Price stated here
-                                        Positioned(
-                                          left: 10.0,
-                                          bottom: 10.0,
-                                         child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: <Widget> [
-                                              Text("\$ Price",style: TextStyle(color:Colors.white,fontSize: 12.0)
-                                              ,),
-        
-                                            ],
-                                          ),
-                                        )
-                                      ],
+                                      ),
                                     ),
                                   )
                                 ],
@@ -171,11 +194,9 @@ class CoursesScreen extends StatelessWidget {
                         );
                       }),
                 ),
-                
-
               ],
             ),
-          CoursesContainer(),
+            CoursesContainer(),
           ],
         ),
       ),

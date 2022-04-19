@@ -60,19 +60,19 @@ class _AuthCardState extends State<AuthCard> {
                     obscureText: true,
                   )
                 : Container(),
-            ElevatedButton(onPressed: _setAuthMode, child: Text("Sign In")),
+            ElevatedButton(onPressed: (){}, child: Text(authMode == AuthMode.SignIn?  "Sign In": "Sign Up")),
             Row(
             mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 GestureDetector(
                   onTap: _setAuthMode,
-                  child: Text("Sign Up",
+                  child: Text(authMode==AuthMode.SignIn? "Sign up Instead": "Sign In",
                       style: TextStyle(
                         color: Colors.red,
                       )),
                 ),
                 SizedBox(width:15),
-                ElevatedButton(onPressed: (){}, child: Text("Submit"))
+                //ElevatedButton(onPressed: (){}, child: Text("Submit"))
               ],
             ),
           ]),
