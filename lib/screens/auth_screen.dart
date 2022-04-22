@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../widgets/auth_card.dart';
 import '../widgets/loading_spinner.dart';
 import '../Models/auth.dart';
+import '../Models/http_exception.dart';
 
 enum AuthMode { SignIn, SignUp }
 
@@ -54,6 +55,22 @@ class _AuthCardState extends State<AuthCard> {
   final _emailController = TextEditingController();
   var _displaySnackBar = false;
 
+  void _showErrorDialog(String message) {
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+              title: Text('An Error Occured'),
+              content: Text(message),
+              actions: <Widget>[
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Ok"))
+              ],
+            ));
+  }
+
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) {
       // Invalid!
@@ -63,31 +80,62 @@ class _AuthCardState extends State<AuthCard> {
     setState(() {
       _isLoading = true;
     });
-    if (_authMode == AuthMode.SignIn) {
-      //login
-      String? mail;
-      String? pass;
-      if (_authData['email'] != null) {
-        mail = _authData['email'];
+    try {
+      if (_authMode == AuthMode.SignIn) {
+        //login
+        String? mail;
+        String? pass;
+        if (_authData['email'] != null) {
+          mail = _authData['email'];
+        }
+        if (_authData['email'] != null) {
+          pass = _authData['password'];
+        }
+        await Provider.of<Auth>(context, listen: false).login(mail!, pass!);
+      } else {
+        String? mail;
+        String? pass;
+        if (_authData['email'] != null) {
+          mail = _authData['email'];
+        }
+        if (_authData['email'] != null) {
+          pass = _authData['password'];
+        }
+        await Provider.of<Auth>(context, listen: false).signUp(
+          mail!,
+          pass!,
+        );
       }
-      if (_authData['email'] != null) {
-        pass = _authData['password'];
+      //instead of using the usual catch, on HttpException is used because we want to handle our own exception
+      //or filter what we catch
+    } on HttpException catch (error) {
+      var errorMessage = 'Authentication Failed';
+      if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = "Email Already Exists!";
+      } else if (error.toString().contains("INVALID_EMAIL")) {
+        errorMessage = "Email is not valid";
+      } else if (error.toString().contains("WEAK_PASSWORD")) {
+        errorMessage = "Password is weak!";
+      } else if (error.toString().contains("EMAIL_NOT_FOUND")) {
+        errorMessage = "Could not Find a user with this email";
+      } else if (error.toString().contains("INVALID_PASSWORD")) {
+        errorMessage = "Password is not correct";
       }
-      await Provider.of<Auth>(context, listen: false).login(mail!, pass!);
-    } else {
-      String? mail;
-      String? pass;
-      if (_authData['email'] != null) {
-        mail = _authData['email'];
-      }
-      if (_authData['email'] != null) {
-        pass = _authData['password'];
-      }
-      await Provider.of<Auth>(context, listen: false).signUp(
-        mail!,
-        pass!,
-      );
+      _showErrorDialog(errorMessage);
+      //Navigator.of(context).pushReplacement('./courses_screen')
+    } catch (error) {
+      var errorMessage = 'Could not Authenticate you. Please Try Again Later!';
+      _showErrorDialog(errorMessage);
     }
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          "Account to be created",
+          textAlign: TextAlign.center,
+        ),
+        duration: Duration(seconds: 3),
+      ),
+    );
     setState(() {
       _isLoading = false;
       _emailController.clear();

@@ -23,36 +23,38 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: Auth(),
-        ),
-        ChangeNotifierProvider.value(value: Cart()),
-        ChangeNotifierProxyProvider<Cart, Orders>(
-          create: (context)=>Orders([]),
-          update: (ctx, cart, previousOrders) => Orders( previousOrders == null ? [] : previousOrders.orders),
-        )
+        providers: [
+          ChangeNotifierProvider.value(
+            value: Auth(),
+          ),
+          ChangeNotifierProvider.value(value: Cart()),
+          ChangeNotifierProxyProvider<Cart, Orders>(
+            create: (context) => Orders([]),
+            update: (ctx, cart, previousOrders) =>
+                Orders(previousOrders == null ? [] : previousOrders.orders),
+          )
         ],
-          child: Consumer<Auth>(
-        builder: (ctx, auth, _) => MaterialApp(
-              title: 'MyShop',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.purple,
-                accentColor: Colors.deepOrange,
-                fontFamily: 'Lato',
-                // pageTransitionsTheme: PageTransitionsTheme(builders: {
-                //   TargetPlatform.android: CustomPageTransitionBuilder(),
-                //   TargetPlatform.iOS : CustomPageTransitionBuilder()
-                // })
-              ),
-              home: AuthScreen(),
-        routes: {
-          CartScreen.routeName: ((context) => CartScreen()),
-          CoursesScreen.routeName: ((context) => CoursesScreen()),
-          MyCoursesScreen.routeName: ((context) => MyCoursesScreen())
-        },
-      ),
-    ));
+        //Consumer is used so that all of the MyApp is not rebuilt
+        child: Consumer<Auth>(
+          builder: (ctx, auth, _) => MaterialApp(
+            title: 'MyShop',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.purple,
+              accentColor: Colors.deepOrange,
+              fontFamily: 'Lato',
+              // pageTransitionsTheme: PageTransitionsTheme(builders: {
+              //   TargetPlatform.android: CustomPageTransitionBuilder(),
+              //   TargetPlatform.iOS : CustomPageTransitionBuilder()
+              // })
+            ),
+            home: auth.isAuth ? CoursesScreen() : CustomBottomNavigator(),
+            routes: {
+              CartScreen.routeName: ((context) => CartScreen()),
+              CoursesScreen.routeName: ((context) => CoursesScreen()),
+              MyCoursesScreen.routeName: ((context) => MyCoursesScreen())
+            },
+          ),
+        ));
   }
 }
