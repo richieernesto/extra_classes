@@ -130,7 +130,7 @@ class _AuthCardState extends State<AuthCard> {
     Scaffold.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          "Account to be created",
+          "Account created",
           textAlign: TextAlign.center,
         ),
         duration: Duration(seconds: 3),

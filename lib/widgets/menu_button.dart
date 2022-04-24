@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../Models/auth.dart';
 
 class MenuButton extends StatelessWidget {
   const MenuButton({Key? key}) : super(key: key);
@@ -22,6 +25,15 @@ class MenuButton extends StatelessWidget {
             leading: Icon(Icons.payment),
             title: Text("Payment"),
             onTap: () {},
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("Logout"),
+            onTap: () {
+              Provider.of<Auth>(context, listen: false).logout();
+              print("Hello World");
+            },
           )
         ],
       ),

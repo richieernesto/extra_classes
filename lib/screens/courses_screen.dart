@@ -1,7 +1,7 @@
 import 'package:extra_classes/Models/courses_container.dart';
 import 'package:extra_classes/screens/More_Info_Screen.dart';
 import 'package:flutter/material.dart';
-import '../widgets/app_bar.dart';
+import '../widgets/menu_button.dart';
 
 import '../widgets/app_bar_search.dart';
 
@@ -123,8 +123,8 @@ class CoursesScreen extends StatelessWidget {
                                                 style: TextStyle(
                                                     fontSize: 10.0,
                                                     color: Colors.grey),
-                                                    maxLines: 3,
-                                                    overflow:TextOverflow.ellipsis ,
+                                                maxLines: 3,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                             )
                                           ],
@@ -154,7 +154,7 @@ class CoursesScreen extends StatelessWidget {
                                           ]),
                                       child: Hero(
                                         tag: imageDirectory,
-                                                                              child: Stack(
+                                        child: Stack(
                                           children: <Widget>[
                                             ClipRRect(
                                               borderRadius:

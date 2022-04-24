@@ -74,4 +74,12 @@ class Auth with ChangeNotifier {
       throw error;
     }
   }
+
+  //Logging out Method
+  void logout() {
+    _token = null;
+    user_Id = null;
+    _expiryToken = null;
+    notifyListeners();
+  }
 }
