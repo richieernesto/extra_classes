@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../screens/courses_screen.dart';
+
+import '../screens/courses_overview_screen.dart';
+//import '../screens/courses_overview_screen.dart';
 import '../screens/my_courses_screen.dart';
 import '../screens/cart_screen.dart';
 import '../screens/settings_screen.dart';
@@ -7,12 +9,13 @@ import '../screens/settings_screen.dart';
 class CustomBottomNavigator extends StatefulWidget {
   @override
   State<CustomBottomNavigator> createState() => _CustomButtomNavigator();
+  static const routeName = "./CustomBottomNavigator";
 }
 
 class _CustomButtomNavigator extends State<CustomBottomNavigator> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    CoursesScreen(),
+    CoursesOverview(),
     MyCoursesScreen(),
     SettingsScreen(),
     CartScreen()
