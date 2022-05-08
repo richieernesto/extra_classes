@@ -6,7 +6,9 @@ class Course with ChangeNotifier {
   final String title;
   final String thumbnail;
   final String description;
+  final String category;
   final double price;
+  final String grade_or_class;
   final String nametutor;
   final String schoolOftutor;
 
@@ -15,7 +17,9 @@ class Course with ChangeNotifier {
     required this.title,
     required this.thumbnail,
     required this.description,
+    required this.category,
     required this.price,
+    required this.grade_or_class,
     required this.nametutor,
     required this.schoolOftutor,
   });

@@ -52,7 +52,8 @@ class MyApp extends StatelessWidget {
                 //   TargetPlatform.iOS : CustomPageTransitionBuilder()
                 // })
               ),
-              home: auth.isAuth ? CustomBottomNavigator() : AuthScreen(),
+              home: //CustomBottomNavigator(),
+                  auth.isAuth ? CustomBottomNavigator() : AuthScreen(),
               routes: {
                 CustomBottomNavigator.routeName: ((context) =>
                     CustomBottomNavigator()),

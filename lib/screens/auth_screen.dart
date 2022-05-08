@@ -104,9 +104,7 @@ class _AuthCardState extends State<AuthCard> {
         await Provider.of<Auth>(context, listen: false).signUp(
           mail!,
           pass!,
-          
         );
-        
       }
       //instead of using the usual catch, on HttpException is used because we want to handle our own exception
       //or filter what we catch
@@ -129,7 +127,7 @@ class _AuthCardState extends State<AuthCard> {
       var errorMessage = 'Could not Authenticate you. Please Try Again Later!';
       _showErrorDialog(errorMessage);
     }
-    
+
     setState(() {
       _isLoading = false;
       _emailController.clear();
@@ -178,7 +176,7 @@ class _AuthCardState extends State<AuthCard> {
               keyboardType: TextInputType.emailAddress,
               controller: _emailController,
               validator: (value) {
-                if (value!.isEmpty || !value!.contains('@')) {
+                if (value!.isEmpty || !value.contains('@')) {
                   return 'Invalid email!';
                 }
                 //return null;

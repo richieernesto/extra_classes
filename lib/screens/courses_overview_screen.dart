@@ -5,6 +5,8 @@ import '../widgets/courses_grid.dart';
 import '../widgets/app_bar_search.dart';
 import '../widgets/menu_button.dart';
 import '../Models/course_products.dart';
+import '../widgets/course_card.dart';
+import '../widgets/popular_courses.dart';
 
 class CoursesOverview extends StatefulWidget {
   //const CoursesOverview({Key? key}) : super(key: key);
@@ -17,6 +19,9 @@ class CoursesOverview extends StatefulWidget {
 class _CoursesOverviewState extends State<CoursesOverview> {
   @override
   Widget build(BuildContext context) {
+    // final loadedCourseData =
+    //     Provider.of<CourseProducts>(context, listen: false);
+    // final loadedCourses = loadedCourseData.items;
     return WillPopScope(
       onWillPop: () async => false,
       child: ChangeNotifierProvider(
@@ -25,7 +30,28 @@ class _CoursesOverviewState extends State<CoursesOverview> {
           appBar: const PreferredSize(
               preferredSize: Size.fromHeight(55), child: CustomAppBar()),
           drawer: MenuButton(),
-          body: CourseGrid(),
+          resizeToAvoidBottomInset: false,
+          body: Container(
+            //height: 400,
+            child: ListView(
+              children: [
+                const Center(
+                  child: Text(
+                    "Welcome to Extra Classes!",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Text(
+                  "Great subjects for your Kids",
+                  textAlign: TextAlign.center,
+                ),
+                Container(
+                  child: CourseGrid(),
+                  //height: double.infinity,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
