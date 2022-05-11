@@ -19,37 +19,48 @@ class CourseGrid extends StatelessWidget {
         Provider.of<CourseProducts>(context, listen: false);
     final loadedCourses = loadedCourseData.items;
     return SingleChildScrollView(
-      child: SizedBox(
-        height: 600,
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          Flexible(
-            //flex: 1,
-            child: ListView.builder(
-              //padding: const EdgeInsets.all(2),
-              itemCount: loadedCourses.length,
-              itemBuilder: (context, i) => ChangeNotifierProvider.value(
-                value: loadedCourses[i],
-                child: CourseCard(),
-              ),
-              scrollDirection: Axis.horizontal,
-              //shrinkWrap: true,
-            ),
+      child: Container(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: SizedBox(
+            height: 700,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Flexible(
+                    //flex: 1,
+                    child: ListView.builder(
+                      //padding: const EdgeInsets.all(2),
+                      itemCount: loadedCourses.length,
+                      itemBuilder: (context, i) => ChangeNotifierProvider.value(
+                        value: loadedCourses[i],
+                        child: CourseCard(),
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      //shrinkWrap: true,
+                    ),
+                  ),
+                  Text(
+                    "Popular Courses",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  Flexible(
+                      flex: 1,
+                      child: Container(
+                        height: double.infinity,
+                        child: ListView.builder(
+                          itemCount: loadedCourses.length,
+                          itemBuilder: (context, i) =>
+                              ChangeNotifierProvider.value(
+                            value: loadedCourses[i],
+                            child: PopularCourses(),
+                          ),
+                        ),
+                      ))
+                ]),
           ),
-          Text(
-            "Popular Courses",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-          Flexible(
-              flex: 1,
-              child: ListView.builder(
-                itemCount: loadedCourses.length,
-                itemBuilder: (context, i) => ChangeNotifierProvider.value(
-                  value: loadedCourses[i],
-                  child: PopularCourses(),
-                ),
-              ))
-        ]),
+        ),
       ),
     );
   }

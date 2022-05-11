@@ -141,7 +141,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                           fontWeight: FontWeight.w200,
                                           fontSize: 22,
                                           letterSpacing: 0.27,
-                                          color: Colors.grey,
+                                          color: Colors.black,
                                         ),
                                       ),
                                       // Icon(
@@ -182,7 +182,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                     fontWeight: FontWeight.w200,
                                     fontSize: 14,
                                     letterSpacing: 0.27,
-                                    color: Colors.grey,
+                                    color: Colors.black,
                                   ),
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
@@ -284,7 +284,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                     height: 60,
                     child: Center(
                       child: Icon(
-                        Icons.favorite,
+                        Icons.shopping_cart,
                         color: Colors.white,
                         size: 30,
                       ),
@@ -358,7 +358,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                   fontWeight: FontWeight.w200,
                   fontSize: 14,
                   letterSpacing: 0.27,
-                  color: Colors.grey,
+                  //color: Colors.grey,
                 ),
               ),
             ],

@@ -6,6 +6,7 @@ import '../widgets/app_bar_search.dart';
 import '../widgets/menu_button.dart';
 import '../Models/orders.dart';
 import '../widgets/cart_item.dart' as cartIt;
+import '../screens/payment_screen.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
@@ -41,11 +42,9 @@ class CartScreen extends StatelessWidget {
                   FlatButton(
                     child: Text('ORDER NOW'),
                     onPressed: () {
-                      Provider.of<Orders>(context, listen: false).addOrder(
-                        cart.items.values.toList(),
-                        cart.totalAmount,
-                      );
-                      cart.clear();
+                      Navigator.of(context).push((MaterialPageRoute(
+                        builder: (context) => PaymentScreen(),
+                      )));
                     },
                     textColor: Theme.of(context).primaryColor,
                   )

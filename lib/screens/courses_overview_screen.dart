@@ -41,10 +41,12 @@ class _CoursesOverviewState extends State<CoursesOverview> {
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
+                //Spacer(),
                 Text(
                   "Great subjects for your Kids",
                   textAlign: TextAlign.center,
                 ),
+                //Spacer(),
                 Container(
                   child: CourseGrid(),
                   //height: double.infinity,

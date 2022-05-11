@@ -27,7 +27,7 @@ class MyCoursesScreen extends StatelessWidget {
                       children: [Container(color: Colors.red)],
                     ))
               ],
-            )
+            ),
           ],
         ),
       ),
