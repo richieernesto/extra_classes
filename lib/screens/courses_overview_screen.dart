@@ -32,6 +32,7 @@ class _CoursesOverviewState extends State<CoursesOverview> {
           drawer: MenuButton(),
           resizeToAvoidBottomInset: false,
           body: Container(
+            height: double.infinity,
             //height: 400,
             child: ListView(
               children: [

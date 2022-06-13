@@ -22,14 +22,14 @@ class CourseGrid extends StatelessWidget {
       child: Container(
         width: double.infinity,
         child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: SizedBox(
-            height: 700,
+          padding: const EdgeInsets.all(1.0),
+          child: Container(
+            height: 500,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Flexible(
-                    //flex: 1,
+                    //flex: 3,
                     child: ListView.builder(
                       //padding: const EdgeInsets.all(2),
                       itemCount: loadedCourses.length,

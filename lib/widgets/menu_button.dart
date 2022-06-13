@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../Models/auth.dart';
 
@@ -31,7 +31,7 @@ class MenuButton extends StatelessWidget {
             leading: Icon(Icons.logout),
             title: Text("Logout"),
             onTap: () {
-              Provider.of<Auth>(context, listen: false).logout();
+              FirebaseAuth.instance.signOut();
               print("Hello World");
             },
           )

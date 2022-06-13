@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import './screens/auth_screen.dart';
 import './screens/cart_screen.dart';
@@ -15,8 +17,12 @@ import 'Models/auth.dart';
 import './Models/course.dart';
 import 'Models/course_products.dart ';
 
-void main() {
-  runApp(const MyApp());
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,43 +31,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider.value(
-            value: Auth(),
-          ),
-          ChangeNotifierProvider.value(value: CourseProducts()),
-          ChangeNotifierProvider.value(value: Cart()),
-          ChangeNotifierProxyProvider<Cart, Orders>(
-            create: (context) => Orders([]),
-            update: (ctx, cart, previousOrders) =>
-                Orders(previousOrders == null ? [] : previousOrders.orders),
-          )
-        ],
-        //Consumer is used so that all of the MyApp is not rebuilt
-        child: Consumer<Auth>(
-          builder: (ctx, auth, _) => MaterialApp(
-              title: 'Extra Classes',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.purple,
-                accentColor: Colors.deepOrange,
-                fontFamily: 'Lato',
-                // pageTransitionsTheme: PageTransitionsTheme(builders: {
-                //   TargetPlatform.android: CustomPageTransitionBuilder(),
-                //   TargetPlatform.iOS : CustomPageTransitionBuilder()
-                // })
-              ),
-              home: //CustomBottomNavigator(),
-                  auth.isAuth ? CustomBottomNavigator() : AuthScreen(),
-              routes: {
-                CustomBottomNavigator.routeName: ((context) =>
-                    CustomBottomNavigator()),
-                CartScreen.routeName: ((context) => CartScreen()),
-                CoursesOverview.routeName: ((context) => CoursesOverview()),
-                MyCoursesScreen.routeName: ((context) => MyCoursesScreen()),
-                //MoreInfoScreen.routeName: ((context) => MoreInfoScreen())
-              }),
-        ));
-  }
-}
+        return MaterialApp(
+        title: 'Extra Class Tutor',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, userSnapshot){
+            if(userSnapshot.hasData){
+            return CustomBottomNavigator();
+          }
+          return AuthScreen();
+          },
+        ),
+      );
+  }}
